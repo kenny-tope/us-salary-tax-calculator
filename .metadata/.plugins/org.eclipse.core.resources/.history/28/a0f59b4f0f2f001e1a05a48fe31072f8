@@ -1,0 +1,105 @@
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Button;
+
+public class App {
+
+	protected Shell shell;
+	private Text salary_text_field;
+	private Text bonus_text_field;
+
+	/**
+	 * Launch the application.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			App window = new App();
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Open the window.
+	 */
+	public void open() {
+		Display display = Display.getDefault();
+		createContents();
+		shell.open();
+		shell.layout();
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+	}
+
+	/**
+	 * Create contents of the window.
+	 */
+	protected void createContents() {
+		shell = new Shell();
+		shell.setSize(500, 500);
+		shell.setText("SWT Application");
+		
+		Combo state_combo = new Combo(shell, SWT.NONE);
+		state_combo.setBounds(111, 81, 84, 34);
+		
+		Label heading_label = new Label(shell, SWT.WRAP);
+		heading_label.setAlignment(SWT.CENTER);
+		heading_label.setFont(SWTResourceManager.getFont("Noto Sans", 24, SWT.NORMAL));
+		heading_label.setBounds(140, 10, 222, 65);
+		heading_label.setText("Tax Calculator");
+		
+		Combo year_combo = new Combo(shell, SWT.NONE);
+		year_combo.setBounds(314, 81, 118, 34);
+		
+		Label year_label = new Label(shell, SWT.WRAP);
+		year_label.setFont(SWTResourceManager.getFont("Noto Sans", 14, SWT.NORMAL));
+		year_label.setBounds(259, 82, 77, 34);
+		year_label.setText("Year:");
+		
+		Label state_label = new Label(shell, SWT.WRAP);
+		state_label.setText("State:");
+		state_label.setFont(SWTResourceManager.getFont("Noto Sans", 14, SWT.NORMAL));
+		state_label.setBounds(49, 82, 77, 34);
+		
+		salary_text_field = new Text(shell, SWT.BORDER);
+		salary_text_field.setBounds(188, 181, 172, 30);
+		
+		Label salary_label = new Label(shell, SWT.WRAP);
+		salary_label.setText("Salary:");
+		salary_label.setFont(SWTResourceManager.getFont("Noto Sans", 14, SWT.NORMAL));
+		salary_label.setBounds(121, 180, 84, 34);
+		
+		bonus_text_field = new Text(shell, SWT.BORDER);
+		bonus_text_field.setBounds(188, 244, 172, 30);
+		
+		Label bonus_label = new Label(shell, SWT.WRAP);
+		bonus_label.setText("Bonus:");
+		bonus_label.setFont(SWTResourceManager.getFont("Noto Sans", 14, SWT.NORMAL));
+		bonus_label.setBounds(121, 243, 84, 34);
+		
+		Button calculate_income_button = new Button(shell, SWT.PUSH);
+		calculate_income_button.setBounds(169, 314, 154, 34);
+		calculate_income_button.setText("Calculate Income");
+		
+		calculate_income_button.addSelectionListener(SWT.Selection, new SelectionListener() {
+		      public void handleEvent(Event e) {
+		        switch (e.type) {
+		        case SWT.Selection:
+		          System.out.println("Button pressed");
+		          break;
+		        }
+		      }
+		 });
+	}
+
+}
