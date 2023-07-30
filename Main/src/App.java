@@ -81,6 +81,19 @@ public class App {
 		
 		salary_text_field = new Text(shell, SWT.BORDER);
 		salary_text_field.setBounds(188, 181, 172, 30);	
+		// learn how this works later
+	    salary_text_field.addVerifyListener(new VerifyListener() {
+	        @Override
+	        public void verifyText(VerifyEvent e) {
+	        	 String currentText = salary_text_field.getText();
+	             String newText = currentText.substring(0, e.start) + e.text + currentText.substring(e.end);
+				 // System.out.println(e.text);
+				 // System.out.println("e.start index = " + e.start + "\n " + "e.end index = " + e.end);
+				 // System.out.println("e.start = " + newText.charAt(e.start) + "\n " + "e.end = " +  newText.charAt(e.end) + "\n");
+	             // Allow digits (0-9), commas, periods, and backspace (to delete)
+	             e.doit = newText.matches("[0-9,.]*");
+	        }
+	    });
 
 		
 		Label salary_label = new Label(shell, SWT.WRAP);
@@ -99,6 +112,15 @@ public class App {
 		Button calculate_income_button = new Button(shell, SWT.NONE);
 		calculate_income_button.setBounds(169, 314, 154, 34);
 		calculate_income_button.setText("Calculate Income");
+		calculate_income_button.addSelectionListener(new SelectionAdapter() {
+		      
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				System.out.print("Test");
+			}
+			
+		 });
+		
+		
 	}
-
 }
