@@ -1,0 +1,20 @@
+
+import java.util.Map;
+import java.util.HashMap;
+
+// factory for state tax objects
+public abstract class StateTaxInformerFactory {
+	
+	// returns a StateTax -> AzStateTax || CaStateTax || OrStateTax etc..
+	public static StateTax create_state_tax(String state) {
+		switch (state) {
+		case: "AZ":
+			return new AzStateTax(); // return AZ State Tax Object containing function logic for calculating AZ state tax
+		case: "CA":
+			return new CaStateTax();
+		default:
+			throw new IllegalArgumentException("State does not exist"); // if state is not currently created
+		}
+	}
+	
+}

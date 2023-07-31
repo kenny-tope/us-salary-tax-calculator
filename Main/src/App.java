@@ -6,7 +6,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.VerifyListener;
@@ -81,17 +80,20 @@ public class App {
 		
 		salary_text_field = new Text(shell, SWT.BORDER);
 		salary_text_field.setBounds(188, 181, 172, 30);	
-		// learn how this works later
+		// 
 	    salary_text_field.addVerifyListener(new VerifyListener() {
 	        @Override
 	        public void verifyText(VerifyEvent e) {
-	        	 String currentText = salary_text_field.getText();
-	             String newText = currentText.substring(0, e.start) + e.text + currentText.substring(e.end);
-				 // System.out.println(e.text);
-				 // System.out.println("e.start index = " + e.start + "\n " + "e.end index = " + e.end);
-				 // System.out.println("e.start = " + newText.charAt(e.start) + "\n " + "e.end = " +  newText.charAt(e.end) + "\n");
-	             // Allow digits (0-9), commas, periods, and backspace (to delete)
-	             e.doit = newText.matches("[0-9,.]*");
+	            String currentText = salary_text_field.getText();
+	            String newText = currentText.substring(0, e.start) + e.text + currentText.substring(e.end);
+	            String regex = "^\\d*\\.?\\d{0,2}$"; // Regular expression for valid format
+
+	            // Allow digits (0-9), commas, periods, and backspace (to delete)
+	            if (newText.matches(regex) || e.text.isEmpty()) {
+	                e.doit = true;
+	            } else {
+	                e.doit = false;
+	            }
 	        }
 	    });
 
@@ -103,6 +105,22 @@ public class App {
 		
 		bonus_text_field = new Text(shell, SWT.BORDER);
 		bonus_text_field.setBounds(188, 244, 172, 30);
+		// 
+		bonus_text_field.addVerifyListener(new VerifyListener() {
+	        @Override
+	        public void verifyText(VerifyEvent e) {
+	            String currentText = bonus_text_field.getText();
+	            String newText = currentText.substring(0, e.start) + e.text + currentText.substring(e.end);
+	            String regex = "^\\d*\\.?\\d{0,2}$"; // Regular expression for valid format
+
+	            // Allow digits (0-9), commas, periods, and backspace (to delete)
+	            if (newText.matches(regex) || e.text.isEmpty()) {
+	                e.doit = true;
+	            } else {
+	                e.doit = false;
+	            }
+	        }
+	    });
 		
 		Label bonus_label = new Label(shell, SWT.WRAP);
 		bonus_label.setText("Bonus:");
@@ -113,14 +131,10 @@ public class App {
 		calculate_income_button.setBounds(169, 314, 154, 34);
 		calculate_income_button.setText("Calculate Income");
 		calculate_income_button.addSelectionListener(new SelectionAdapter() {
-		      
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				System.out.print("Test");
+				// do it right here
 			}
-			
-		 });
-		
-		
+		});
 	}
 }

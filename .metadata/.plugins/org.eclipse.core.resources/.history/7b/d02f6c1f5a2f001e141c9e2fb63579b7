@@ -1,0 +1,27 @@
+
+// factory for state tax objects
+public abstract class StateTaxFactory {
+	
+	// returns a StateTax -> AzStateTax || CaStateTax || OrStateTax etc..
+	// will fill in the rest of the Classes later -> only 2 for testing for now ...
+	
+	public static StateTax create_state_tax(String state) {
+		switch (state) {
+		case "AZ":
+			return new AzStateTax(); // return AZ State Tax Object containing function logic for calculating AZ state tax
+		case "CA":
+			return new CaStateTax();
+		default:
+			throw new IllegalArgumentException("State does not exist"); // if state is not currently created
+		}
+	}
+	
+}
+
+
+/* when you get back ->
+ * 	implement button click -> pull the state -> and create_state_tax to create an AZ or CA object with it
+ * 	using that object, call it's function calculate_state_tax(salary_from_text_field)
+ *	then print that object to the console
+ */
+*/
